@@ -10,3 +10,8 @@ export interface Book {
   borrowDate?: string;
   returnDate?: string;
 }
+
+export interface AdminCredentials {
+  username: string;
+  password: string;
+}

@@ -10,13 +10,17 @@ export default function AdminLoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const success = login({ username, password });
-    if (success) {
-      navigate('/admin');
-    } else {
-      setError('Username atau password salah');
+    try {
+      const success = await login({ username, password });
+      if (success) {
+        navigate('/admin');
+      } else {
+        setError('Username atau password salah');
+      }
+    } catch (error) {
+      setError('Terjadi kesalahan saat login');
     }
   };
 

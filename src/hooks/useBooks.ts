@@ -101,13 +101,13 @@ export function useBooks() {
       setLoading(true);
       const newBook = {
         ...book,
-        status: 'available'
+        status: 'available' as const
       };
       
       const booksCollection = collection(db, 'books');
       const docRef = await addDoc(booksCollection, newBook);
       
-      const bookWithId: Book = {
+      const bookWithId = {
         ...newBook,
         id: docRef.id,
       };
@@ -126,7 +126,7 @@ export function useBooks() {
       const bookRef = doc(db, 'books', bookId);
       
       const updateData = {
-        status: 'borrowed',
+        status: 'borrowed' as const,
         borrower,
         borrowDate: new Date().toLocaleDateString('id-ID')
       };
@@ -136,7 +136,7 @@ export function useBooks() {
       setBooks(prevBooks =>
         prevBooks.map(book =>
           book.id === bookId
-            ? { ...book, ...updateData }
+            ? { ...book, ...updateData } as Book
             : book
         )
       );
@@ -153,7 +153,7 @@ export function useBooks() {
       const bookRef = doc(db, 'books', bookId);
       
       const updateData = {
-        status: 'available',
+        status: 'available' as const,
         borrower: null,
         borrowDate: null
       };
@@ -165,10 +165,10 @@ export function useBooks() {
           book.id === bookId
             ? {
                 ...book,
-                status: 'available',
+                status: 'available' as const,
                 borrower: undefined,
                 borrowDate: undefined
-              }
+              } as Book
             : book
         )
       );

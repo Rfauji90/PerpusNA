@@ -55,7 +55,6 @@ export default function AdminPage() {
     e.preventDefault();
     addBook({
       ...newBook,
-      status: 'available',
       imageUrl: imagePreview || undefined
     });
     setNewBook({
